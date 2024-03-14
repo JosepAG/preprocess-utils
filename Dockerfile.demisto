@@ -1,0 +1,6 @@
+FROM demisto/python3:3.10.13.80593 AS builder
+
+COPY ./ /src/
+
+FROM demisto/python3:3.10.13.80593
+RUN --mount=type=bind,from=builder,source=/src,target=/src  pip install --no-cache /src/
